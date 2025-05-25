@@ -1,0 +1,62 @@
+.subject-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px 0 rgba(44, 62, 80, 0.08);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 350px;
+  max-width: 356px;
+  min-width: 320px;
+}
+
+.subject-card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: #f4f4f7;
+}
+
+.subject-card-body {
+  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.subject-card-subject {
+  color: #6c63ff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.subject-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.7rem 0;
+  color: #23263b;
+}
+
+.subject-card-description {
+  font-size: 1rem;
+  color: #6b7280;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.subject-card-cta {
+  color: #6c63ff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.subject-card-cta:hover {
+  text-decoration: underline;
+}
