@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './SubjectCard.css'
 
-const SubjectCard = ({ subject, to, image, subtitle, description, cta = 'Start Course →' }) => (
+const SubjectCard = ({ subject, to, image, subtitle, description, cta = 'Vælg Fag →' }) => (
   <Link to={to} className="subject-card">
     {image && <img src={image} alt={subject} className="subject-card-image" />}
     <div className="subject-card-body">

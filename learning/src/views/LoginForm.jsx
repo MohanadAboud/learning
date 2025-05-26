@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth'
-import app from '../Firebase'
+import { app } from '../Firebase'
 import { FcGoogle } from 'react-icons/fc'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../assets/logo.svg'
@@ -15,11 +15,13 @@ const LoginForm = ({ setIsLoggedIn }) => {
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider()
     try {
-      await signInWithPopup(auth, provider)
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
+      localStorage.setItem('quiz_username', user.displayName || user.email)
       setIsLoggedIn(true)
       navigate('/home')
-    } catch (error) {
-      setError('Google Login Error: ' + error.message)
+    } catch (err) {
+      setError('Google Login Error: ' + err.message)
     }
   }
 
@@ -27,11 +29,13 @@ const LoginForm = ({ setIsLoggedIn }) => {
     e.preventDefault()
     setError('')
     try {
-      await signInWithEmailAndPassword(auth, email, password)
+      const result = await signInWithEmailAndPassword(auth, email, password)
+      const user = result.user
+      localStorage.setItem('quiz_username', user.displayName || user.email)
       setIsLoggedIn(true)
       navigate('/home')
-    } catch (error) {
-      setError('Login Error: ' + error.message)
+    } catch (err) {
+      setError('Login Error: ' + err.message)
     }
   }
 
@@ -41,10 +45,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
         <div className="login-logo">
           <img src={Logo} alt="Gyldendal Logo" />
         </div>
-        <div className="login-title-main">Gyldendal<br />Learning</div>
+        <div className="login-title-main">
+          Gyldendal
+          <br />
+          Learning
+        </div>
         <div className="login-tabs">
           <span className="active">Log In</span>
-          <Link to="/register" className="inactive">Sign Up</Link>
+          <Link to="/register" className="inactive">
+            Sign Up
+          </Link>
         </div>
         <form className="login-form-modern" onSubmit={handleEmailLogin}>
           <label className="login-label">Email</label>

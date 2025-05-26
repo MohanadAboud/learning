@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useNavigate, Link } from 'react-router-dom'
-import app from '../Firebase'
+import { app } from '../Firebase'
 import { FcGoogle } from 'react-icons/fc'
 import Logo from '../assets/logo.svg'
 
@@ -20,7 +20,10 @@ const RegisterForm = () => {
     setError('')
     setSuccess('')
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      const user = userCredential.user
+      await updateProfile(user, { displayName: fullName })
+      localStorage.setItem('currentUser', user.email)
       setSuccess('Account created! Redirecting to login...')
       setFullName('')
       setEmail('')
@@ -33,8 +36,22 @@ const RegisterForm = () => {
     }
   }
 
-  const handleGoogleSignup = () => {
-    // Add your Google signup logic here
+  const handleGoogleSignup = async () => {
+    setError('')
+    setSuccess('')
+    const provider = new GoogleAuthProvider()
+    try {
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
+      localStorage.setItem('currentUser', user.email)
+      setSuccess('Account created with Google! Redirecting to login...')
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    } catch (err) {
+      setError('Google Signup Error: ' + err.message)
+    }
+    localStorage.setItem('quiz_username', fullName)
   }
 
   return (

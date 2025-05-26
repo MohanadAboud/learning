@@ -35,15 +35,15 @@ const Navbar = () => {
             <span className="navbar-icon">
               <FiHome />
             </span>
-            <span>Home</span>
+            <span>Hjem</span>
           </Link>
           <Link to="/Kurser" className="navbar-item" onClick={toggleSidebar}>
             <span className="navbar-icon">
               <FaGraduationCap />
             </span>
-            <span>kurser</span>
+            <span>Fag</span>
           </Link>
-          <Link to="/*" className="navbar-item" onClick={toggleSidebar}>
+          <Link to="/leaderboard" className="navbar-item" onClick={toggleSidebar}>
             <span className="navbar-icon">
               <FaTrophy />
             </span>
@@ -53,14 +53,14 @@ const Navbar = () => {
             <span className="navbar-icon">
               <FiUser />
             </span>
-            <span>Account</span>
+            <span>Profil</span>
           </Link>
 
           <Link to="/" className="navbar-item" onClick={toggleSidebar}>
             <span className="navbar-icon">
               <FiLogOut />
             </span>
-            <span>Logout</span>
+            <span>Logud</span>
           </Link>
         </nav>
       </aside>

@@ -1,0 +1,63 @@
+.account-stats {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  max-width: 300px;
+}
+
+.account-stats-title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.stat-label {
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+/* Stat card color classes */
+.stat-rank {
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+.stat-points {
+  background: #f1f5ff;
+  color: #6366f1;
+}
+
+.stat-courses {
+  background: #f0fdf4;
+  color: #22c55e;
+}
+
+.stat-quizzes {
+  background: #f8fafc;
+  color: #0ea5e9;
+}

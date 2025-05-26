@@ -6,13 +6,18 @@ import Footer from './components/Footer'
 import LoginForm from './views/LoginForm'
 import RegisterForm from './views/RegisterForm'
 import Home from './views/Home'
-import Leaderboard from './views/LeaderBoard'
+import LeaderBoard from './views/LeaderBoard'
 import Kurser from './views/Kurser'
 import Account from './views/Account'
 import Logo from './assets/logo.svg'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import app from './Firebase'
+import { app } from './Firebase'
 import NoPage from './views/NoPage'
+import Filosofi from './views/filosofi'
+import Historie from './views/Historie'
+import Litteratur from './views/Litteratur'
+import FooterMobile from './components/FooterMobile'
+import QuizPage from './components/QuizPage'
 
 const StartupScreen = ({ onClick }) => (
   <>
@@ -32,6 +37,7 @@ const Layout = ({ children, isLoggedIn }) => {
       {!hideNavAndFooter && isLoggedIn && <Navbar />}
       {children}
       {!hideNavAndFooter && isLoggedIn && <Footer />}
+      {!hideNavAndFooter && isLoggedIn && <FooterMobile />}
     </>
   )
 }
@@ -61,7 +67,10 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/Kurser" element={<Kurser />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/leaderboard" element={<LeaderBoard />} /> <Route path="/filosofi" element={<Filosofi />} />
+          <Route path="/historie" element={<Historie />} />
+          <Route path="/litteratur" element={<Litteratur />} />
+          <Route path="/:subject/:quizId" element={<QuizPage />} />
           <Route path="/*" element={<NoPage />} />
         </Routes>
       </Layout>

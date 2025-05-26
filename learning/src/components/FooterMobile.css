@@ -1,0 +1,40 @@
+.footer-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #fff;
+  border-top: 1px solid #eee;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.footer-mobile-link {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #888;
+  font-size: 12px;
+  padding: 6px 0 0 0;
+  transition: color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-mobile-link .footer-mobile-icon {
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.footer-mobile-link.active,
+.footer-mobile-link:active {
+  color: #4b2995;
+}
+
+.footer-mobile-link:focus {
+  outline: none;
+  color: #4b2995;
+}

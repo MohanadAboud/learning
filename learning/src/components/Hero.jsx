@@ -7,16 +7,14 @@ const Hero = () => {
     <section className="hero-section">
       <div className="hero-container">
         <div className="hero-text">
-          <h1 className="hero-title">
-            Discover the Depths <br /> of Human Knowledge
-          </h1>
-          <p className="hero-desc">Explore history, philosophy, and social studies through interactive courses and quizzes.</p>
+          <h1 className="hero-title">Bliv en del af Fællesskab</h1>
+          <p className="hero-desc">Dyk ned i historie, filosofi og samfundsfag med interaktive kurser og quizzer.</p>
           <div className="hero-buttons">
             <Link to="/Kurser">
               <button className="hero-btn hero-btn-primary">Start Learning</button>
             </Link>
-            <Link to="/*">
-              <button className="hero-btn hero-btn-secondary">View Leaderboard</button>
+            <Link to="/leaderboard">
+              <button className="hero-btn hero-btn-secondary">Se Leaderboard</button>
             </Link>
           </div>
         </div>

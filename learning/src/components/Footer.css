@@ -1,5 +1,4 @@
 .custom-footer {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   background: #000;
@@ -8,6 +7,9 @@
   font-family: Arial, sans-serif;
   font-size: 1rem;
   flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
 }
 
 .footer-left {
