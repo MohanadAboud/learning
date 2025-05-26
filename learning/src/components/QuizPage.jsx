@@ -1,48 +1,47 @@
 import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { quizzes } from '../data/quizzes'
 import './QuizPage.css'
+import { ref, get, set, update } from 'firebase/database'
+import { rtdb } from '../Firebase'
+import { getAuth } from 'firebase/auth'
 
 const calculatePoints = (questions, selected) => questions.reduce((acc, q, i) => acc + (selected[i] === q.answer ? 10 : 0), 0)
 
-const LOCAL_LEADERBOARD_KEY = 'local_leaderboard'
-
-const saveUserScoreLocally = (username, points) => {
-  let leaderboard = []
-  try {
-    leaderboard = JSON.parse(localStorage.getItem(LOCAL_LEADERBOARD_KEY)) || []
-  } catch {
-    leaderboard = []
-  }
-  // If user exists, update score, else add new
-  const idx = leaderboard.findIndex((u) => u.username === username)
-  if (idx !== -1) {
-    leaderboard[idx].points += points
+const saveUserScoreToFirebase = async (username, points) => {
+  const userRef = ref(rtdb, `leaderboard/${username}`)
+  const snapshot = await get(userRef)
+  if (snapshot.exists()) {
+    const userData = snapshot.val()
+    await update(userRef, { points: (userData.points || 0) + points })
   } else {
-    leaderboard.push({ username, points })
+    await set(userRef, { username, points })
   }
-  localStorage.setItem(LOCAL_LEADERBOARD_KEY, JSON.stringify(leaderboard))
 }
 
 const QuizPage = () => {
   const { subject, quizId } = useParams()
   const navigate = useNavigate()
-  const questions = quizzes[subject]?.[quizId] || []
-
+  const questions = useMemo(() => quizzes[subject]?.[quizId] || [], [subject, quizId])
   const [current, setCurrent] = useState(0)
   const [selected, setSelected] = useState([])
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
   const [score, setScore] = useState(null)
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('Guest')
 
   useEffect(() => {
     setSelected(Array(questions.length).fill(null))
     setCurrent(0)
-    // Get username/email from localStorage (set during login/register)
-    const stored = localStorage.getItem('quiz_username')
-    if (stored) setUsername(stored)
-    else setUsername('Guest')
+    // Get username from Firebase Auth
+    const auth = getAuth()
+    const user = auth.currentUser
+    if (user) {
+      setUsername(user.displayName || user.email || 'Guest')
+    } else {
+      setUsername('Guest')
+    }
   }, [questions])
 
   const handleOptionClick = (idx) => {
@@ -54,7 +53,7 @@ const QuizPage = () => {
   const handlePrev = () => setCurrent((c) => Math.max(0, c - 1))
   const handleNext = () => setCurrent((c) => Math.min(questions.length - 1, c + 1))
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     if (!username) {
       setError('No user found. Please log in.')
       return
@@ -62,7 +61,7 @@ const QuizPage = () => {
     setSaving(true)
     setError('')
     const points = calculatePoints(questions, selected)
-    saveUserScoreLocally(username, points)
+    await saveUserScoreToFirebase(username, points)
     setScore(points)
     setSaving(false)
     navigate('/leaderboard')

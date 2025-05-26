@@ -570,6 +570,14 @@ body,
 /* leaderboard */
 
 @media (max-width: 700px) {
+  .leaderboard-top-card.top1,
+  .leaderboard-top-card.top2,
+  .leaderboard-top-card.top3 {
+    display: none;
+  }
+}
+
+@media (max-width: 2700px) {
   .account-header-row {
     flex-direction: column;
     gap: 20px;
@@ -587,11 +595,5 @@ body,
   }
   .leaderboard-page {
     padding: 0 20px;
-  }
-
-  .leaderboard-top-card.top1,
-  .leaderboard-top-card.top2,
-  .leaderboard-top-card.top3 {
-    display: none;
   }
 }

@@ -4,26 +4,27 @@ import AccountStats from '../components/AccountStats'
 import { auth } from '../Firebase'
 
 const Account = () => {
-  const [user, setUser] = useState({
-    name: localStorage.getItem('quiz_username') || 'Alex Johnson',
-    avatarUrl: '/avatar.png',
-  })
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    let avatarUrl = '/avatar.png'
     const currentUser = auth.currentUser
-    if (currentUser && currentUser.photoURL) {
-      avatarUrl = currentUser.photoURL
+    let avatarUrl = '/avatar.png'
+    let name = ''
+    if (currentUser) {
+      avatarUrl = currentUser.photoURL || avatarUrl
+      name = currentUser.displayName || currentUser.email || ''
     }
-    setUser((prev) => ({
-      ...prev,
+    setUser({
+      name,
       avatarUrl,
-    }))
+    })
   }, [])
 
   const handleEditProfile = () => {
     alert('Edit Profile clicked!')
   }
+
+  if (!user) return null // or a loading spinner
 
   return (
     <div style={{ maxWidth: 900, margin: '40px auto', padding: 24 }}>

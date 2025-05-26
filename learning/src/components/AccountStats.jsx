@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './AccountStats.css'
-
-const LOCAL_LEADERBOARD_KEY = 'local_leaderboard'
+import { ref, get } from 'firebase/database'
+import { rtdb } from '../Firebase'
 
 const StatCard = ({ icon, label, value, className }) => (
   <div className={`stat-card ${className}`}>
@@ -20,20 +20,24 @@ const AccountStats = ({ username }) => {
   })
 
   useEffect(() => {
-    let leaderboard = []
-    try {
-      leaderboard = JSON.parse(localStorage.getItem(LOCAL_LEADERBOARD_KEY)) || []
-    } catch {
-      leaderboard = []
+    const fetchStats = async () => {
+      const leaderboardRef = ref(rtdb, 'leaderboard')
+      const snapshot = await get(leaderboardRef)
+      let leaderboard = []
+      if (snapshot.exists()) {
+        leaderboard = Object.values(snapshot.val())
+        leaderboard.sort((a, b) => b.points - a.points)
+        const userIndex = leaderboard.findIndex((u) => u.username === username)
+        if (userIndex !== -1) {
+          const userData = leaderboard[userIndex]
+          setStats({
+            rank: userIndex + 1,
+            points: userData.points || 0,
+          })
+        }
+      }
     }
-    const userIndex = leaderboard.findIndex((u) => u.username === username)
-    if (userIndex !== -1) {
-      const userData = leaderboard[userIndex]
-      setStats({
-        rank: userIndex + 1,
-        points: userData.points || 0,
-      })
-    }
+    fetchStats()
   }, [username])
 
   return (

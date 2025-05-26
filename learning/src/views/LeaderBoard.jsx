@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react'
-
-const LOCAL_LEADERBOARD_KEY = 'local_leaderboard'
+import { ref, get } from 'firebase/database'
+import { rtdb } from '../Firebase'
 
 const LeaderBoard = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    let leaderboard = []
-    try {
-      leaderboard = JSON.parse(localStorage.getItem(LOCAL_LEADERBOARD_KEY)) || []
-    } catch {
-      leaderboard = []
+    const fetchLeaderboard = async () => {
+      const leaderboardRef = ref(rtdb, 'leaderboard')
+      const snapshot = await get(leaderboardRef)
+      let leaderboard = []
+      if (snapshot.exists()) {
+        leaderboard = Object.values(snapshot.val())
+        leaderboard.sort((a, b) => b.points - a.points)
+      }
+      setUsers(leaderboard)
     }
-    // Sort by points descending
-    leaderboard.sort((a, b) => b.points - a.points)
-    setUsers(leaderboard)
+    fetchLeaderboard()
   }, [])
 
   const podium = users.slice(0, 3)
