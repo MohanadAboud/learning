@@ -34,7 +34,6 @@ const QuizPage = () => {
   useEffect(() => {
     setSelected(Array(questions.length).fill(null))
     setCurrent(0)
-    // Get username from Firebase Auth
     const auth = getAuth()
     const user = auth.currentUser
     if (user) {

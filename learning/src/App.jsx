@@ -13,11 +13,12 @@ import Logo from './assets/logo.svg'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from './Firebase'
 import NoPage from './views/NoPage'
-import Filosofi from './views/filosofi'
+import Filosofi from './views/Filosofi'
 import Historie from './views/Historie'
 import Litteratur from './views/Litteratur'
 import FooterMobile from './components/FooterMobile'
 import QuizPage from './components/QuizPage'
+import QuizIntro from './components/QuizIntro'
 
 const StartupScreen = ({ onClick }) => (
   <>
@@ -67,10 +68,12 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/Kurser" element={<Kurser />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/leaderboard" element={<LeaderBoard />} /> <Route path="/filosofi" element={<Filosofi />} />
-          <Route path="/historie" element={<Historie />} />
+          <Route path="/leaderboard" element={<LeaderBoard />} />
           <Route path="/litteratur" element={<Litteratur />} />
+          <Route path="/filosofi" element={<Filosofi />} />
+          <Route path="/historie" element={<Historie />} />
           <Route path="/:subject/:quizId" element={<QuizPage />} />
+          <Route path="/:subject/:quizId/intro" element={<QuizIntro />} />
           <Route path="/*" element={<NoPage />} />
         </Routes>
       </Layout>

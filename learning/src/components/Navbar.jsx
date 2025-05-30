@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiHome, FiUser, FiLogOut, FiX, FiMenu } from 'react-icons/fi'
-import { FaGraduationCap, FaTrophy } from 'react-icons/fa'
+import { FaBook, FaTrophy } from 'react-icons/fa'
 import './Navbar.css'
 import logo from '../assets/logo.svg'
 
@@ -39,7 +39,7 @@ const Navbar = () => {
           </Link>
           <Link to="/Kurser" className="navbar-item" onClick={toggleSidebar}>
             <span className="navbar-icon">
-              <FaGraduationCap />
+              <FaBook />
             </span>
             <span>Fag</span>
           </Link>

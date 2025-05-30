@@ -15,8 +15,7 @@ const Kurser = () => {
       <section className="subjects-section">
         <SubjectCard subject="Hvad er filosofi" subtitle="Filosofi" image="/filosofi.avif" to="/filosofi" />
         <SubjectCard subject="Lær om litteraturens verden" subtitle="Litteratur" image="/books.avif" to="/litteratur" />
-
-        <SubjectCard subtitle="Historie" image="/history.avif" description="Coming soon" to="/*" />
+        <SubjectCard subtitle="Historie" image="/historie.avif" description="Coming soon" to="/*" />
       </section>
     </div>
   )

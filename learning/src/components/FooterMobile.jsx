@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
-import { FaHome, FaBook, FaTrophy, FaUser } from 'react-icons/fa'
+import { FiHome, FiUser } from 'react-icons/fi'
+import { FaBook, FaTrophy } from 'react-icons/fa'
+
 import './FooterMobile.css'
 
 const FooterMobile = () => {
@@ -8,7 +10,7 @@ const FooterMobile = () => {
     <nav className="footer-mobile">
       <Link to="/home" className={`footer-mobile-link${location.pathname === '/home' ? ' active' : ''}`}>
         <span className="footer-mobile-icon">
-          <FaHome />
+          <FiHome />
         </span>
         <span className="footer-mobile-label">Home</span>
       </Link>
@@ -26,7 +28,7 @@ const FooterMobile = () => {
       </Link>
       <Link to="/account" className={`footer-mobile-link${location.pathname === '/account' ? ' active' : ''}`}>
         <span className="footer-mobile-icon">
-          <FaUser />
+          <FiUser />
         </span>
         <span className="footer-mobile-label">Profile</span>
       </Link>

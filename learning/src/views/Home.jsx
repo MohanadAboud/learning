@@ -34,7 +34,7 @@ const Home = () => {
         <section className="subjects-section">
           <SubjectCard subtitle="Litteratur" image="/books.avif" to="/litteratur" />
           <SubjectCard subtitle="Filosofi" image="/filosofi.avif" to="/filosofi" />
-          <SubjectCard subtitle="Historie" image="/history.avif" description="Coming soon" to="/*" />
+          <SubjectCard subtitle="Historie" image="/historie.avif" description="Coming soon" to="/*" />
         </section>
       </div>
     </>

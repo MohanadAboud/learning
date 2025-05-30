@@ -1,0 +1,22 @@
+.quiz-intro-pdf {
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 80vh;
+  min-height: 300px;
+  max-height: 80vh;
+  border-radius: 8px;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+h5 {
+  margin: 1rem 0;
+}
+
+@media (max-width: 600px) {
+  .quiz-intro-pdf {
+    min-height: 280px;
+    border-radius: 4px;
+  }
+}
