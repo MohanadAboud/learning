@@ -10,13 +10,43 @@
   box-sizing: border-box;
 }
 
+.quiz-intro-speech {
+  position: relative;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0 0.5rem 0; /* Remove auto centering */
+  max-width: 400px;
+  text-align: left; /* Left align text */
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
 h5 {
   margin: 1rem 0;
+}
+
+.quiz-intro-icon {
+  display: block;
+  margin: 0 0 1.5rem 16px; /* Align icon to left with some indent */
+  width: 48px;
+  height: 48px;
 }
 
 @media (max-width: 600px) {
   .quiz-intro-pdf {
     min-height: 280px;
     border-radius: 4px;
+  }
+  .quiz-intro-speech {
+    max-width: 95%;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+  .quiz-intro-icon {
+    margin-left: 8px;
+    width: 40px;
+    height: 40px;
   }
 }
